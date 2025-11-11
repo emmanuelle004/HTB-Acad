@@ -1,1 +1,11 @@
+- Microsoft Windows started as a GUI on top of MS-DOS (1985) and evolved through many releases (NT, 2000, XP, 7, 10, 11).
+- Windows Server editions (NT, 2000, 2003, 2008, 2012, 2016, 2019+) added:
+  - Centralized management (Active Directory, Group Policy, MMC)
+  - Web, file, and application services
+  - Virtualization (Hyper-V), clustering, and security features
+- Each version has a specific version number (e.g. 5.1 = XP, 6.1 = 7, 10.0 = 10/Server 2016+).
+- Older/legacy versions become unsupported and are common sources of risk in real environments.
 
+Security takeaway:
+-Running out-of-support Windows (old desktop or server versions) increases exposure to known vulnerabilities (e.g. SMBv1/EternalBlue)
+-Being able to quickly identify Windows versions helps assess exposure to known vulnerabilities and missing patches.
