@@ -1,0 +1,26 @@
+Remote vs Local Access
+
+- Local access: interacting directly with the machine (keyboard, mouse, screen).
+- Remote access: interacting with the machine over the network.
+- Common remote access technologies:
+  - VPN, SSH, VNC, WinRM, FTP
+
+#Remote Desktop Protocol (RDP)
+
+- Client/server model:
+  - Client connects to a target IP/hostname where RDP is enabled.
+  - Default port: TCP 3389.
+- Allows full interactive desktop as if physically at the machine.
+- In secure environments: restrict by firewall/VPN, use strong auth and proper certificates.
+
+Typical command from linux:
+
+xfreerdp /v:<target-ip> /u:<username> /p:<password>
+xfreerdp3 /v:<target-ip> /u:<username> /p:<password>
+
+PowerShell / WMI: Identifying the OS
+
+Used PowerShell’s 'Get-WmiObject' to query Windows Management Instrumentation (WMI):
+
+powershell
+Get-WmiObject -Class Win32_OperatingSystem | Select Version, BuildNumber
