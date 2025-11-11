@@ -1,1 +1,32 @@
+Objective:
+Understand the layout of the Windows boot drive to know where the OS lives, where applications store data, and where to look for potential evidence or misconfigurations.
+
+Key directories on C:\
+
+-C:\ – Root/boot partition, contains core system folders and files.
+-C:\PerfLogs – Used for performance logs; often empty by default but can contain useful data for troubleshooting or analysis.
+-C:\Program Files – On 64-bit systems: 64-bit applications.
+-C:\Program Files (x86) – 32-bit applications on 64-bit systems.
+-C:\ProgramData – Hidden, machine-wide application data accessible to all users; often used for configs, databases, and service data.
+-C:\Users – User profiles.
+-Default – Template for new user profiles.
+-Public – Shared files for all users; can also be shared over the network.
+Each user has an AppData folder:
+-Roaming – Follows the user (for example, in domain environments); app settings.
+-Local – Machine-specific data such as caches and large files.
+-LocalLow – Similar to Local but lower integrity; often used by sandboxed apps or browsers.
+C:\Windows – Core operating system files.
+C:\Windows\System32 and C:\Windows\SysWOW64 – Critical executables and DLLs used by Windows and applications.
+C:\Windows\WinSxS – Component store holding versions of system components and updates (useful for servicing and patching).
+
+Commands used:
+
+dir C:\ /a
+tree "C:\Program Files (x86)\VMware"
+
+Security takeaway:
+-Knowing these default locations helps you quickly find sensitive data, configs, logs, and binaries.
+-PerfLogs, ProgramData, Public, and some AppData paths can be used for logging, staging, or abuse; they’re places to check for suspicious files.
+-Weak or misconfigured NTFS permissions on these folders can enable unauthorized access, persistence, or privilege escalation.
+-Recognizing what is normal makes it easier to spot out-of-place artifacts.
 
