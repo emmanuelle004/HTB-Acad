@@ -25,9 +25,25 @@ A byte is 8 bits.
 Ethernet Standards are defined in the IEEE 802.3 standard. (1983)
 IEEE = Institute of Electrical and Electronics Engineers.
 
-Speed    --   Common Name   -- IEEE Standard -- Informal Name -- Max Length
-10 Mbps  --     Ethernet    --   802.3i    -- 10BASE-T        -- 100m
-100 Mbps -- Fast Ethernet   --   802.3u    -- 100BASE-T       -- 100m
-1 Gbps   --   Gig Ethernet  --   802.3ab   -- 1000BASE-T      -- 100m
-10 Gbps  -- 10 Gig Ethernet --   802.3an   -- 10GBASE-T       -- 100m
+Speed    --   Common Name   -- IEEE Standard -- Informal Name -- Max Length  -- # of wires used
+10 Mbps  --     Ethernet    --   802.3i    -- 10BASE-T        -- 100m        -- 2 pairs (4 wires)
+100 Mbps -- Fast Ethernet   --   802.3u    -- 100BASE-T       -- 100m        -- 2 pairs (4 wires)
+1 Gbps   --   Gig Ethernet  --   802.3ab   -- 1000BASE-T      -- 100m        -- 4 pairs (8 wires)
+10 Gbps  -- 10 Gig Ethernet --   802.3an   -- 10GBASE-T       -- 100m        -- 4 pairs (8 wires)
+
+where BASE refers to baseband signaling and T is twisted pair.
+
+Ethernet standards use Unshielded Twisted Pair (UTP) cables.
+- Unshielded means the wires have no shielding making them vulnerable to electromagnetic interferance (EMI).
+-Twisted pair is for the 4 pairs of wired that are twisted together.
+Ethernet cables are usually terminated using a registered jack (RJ) 45 connectors. An RJ45 connector has 8 pins,
+just as Ethernet cables have 8 wires.
+
+10-BASE-T and 100-BASE-T use 2 pairs.
+PCs, routers, firewalls, and other network devices use pins 1 & 2 to transmit (Tx) and pins 3 & 6 are used to receive data(Rx). 
+Switches Rx data on pins 1 & 2 and Tx on pins 3 & 6. This allows for full-duplux transmission (send and receive data at the same time).
+
+
+
+
 
