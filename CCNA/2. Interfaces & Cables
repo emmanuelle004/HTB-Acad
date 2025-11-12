@@ -1,4 +1,4 @@
-Ethernet is a collection of network protocols/standards.
+Ethernet is a family of LAN technologies defined by IEEE 802.3 (Layers 1 - 2).
 
 Network protocols are necessary to ensure interoperability between devices from different vendors or platforms. This results in vendor neutrality. Also, it is useful for
 modularity via layers, that is, upgrade por modify parts without breaking others. Lastly, promotes sacalability and troubleshooting because knowing what each layer/protocol 
