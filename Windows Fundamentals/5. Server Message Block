@@ -3,6 +3,11 @@ Understand how NTFS permissions and share permissions work together on Windows S
 
 SMB Basics
 SMB (Server Message Block) is used by Windows to share files, folders, and printers.
+SMB Ports
+-TCP 445 — SMB “direct hosting” (SMBv2/v3 use this by default).
+-TCP 139 — NetBIOS Session Service (legacy SMB over NetBIOS).
+-UDP 137 — NetBIOS Name Service (NBNS).
+-UDP 138 — NetBIOS Datagram Service.
 
 Accessed as \\SERVER\Share
 
