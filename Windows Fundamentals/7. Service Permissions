@@ -1,0 +1,47 @@
+#Services Permissions.
+
+Services run with specific identities and DACLs. Weak service config/ACLs or writable binary paths let attackers replace executables/DLLs, 
+escalate to the service account (often LocalSystem), and persist.
+
+#Key takeaways
+Who can do what is defined by the service’s SDDL/DACL (e.g., from sc sdshow).
+Effective risk = service logon account (StartName) × binary/DLL path ACLs × service DACL.
+DLL-based services often run under svchost.exe
+
+#Common misconfigs
+Writable binpath or service folder = drop your EXE/DLL.
+Unquoted path with spaces (e.g., C:\Program Files\App Service\app.exe) = path-hijack via writable subfolder.
+Over-permissive service DACL (e.g., Authenticated Users can change config).
+Runs as LocalSystem unnecessarily.
+Recovery actions set to “Run a program” = execute arbitrary binary on failure.
+
+#Quick audit checklist
+-Service config = sc qc <ServiceName>
+---Note BINARY_PATH_NAME and SERVICE_START_NAME.
+
+-Service DACL (who can change it) = sc sdshow <ServiceName>
+---Pay attention to A;;…;;;AU/BU with powerful rights (e.g., WP/DT/WD/WO/SD).
+
+-If hosted by svchost (DLL service) = reg query HKLM\SYSTEM\CurrentControlSet\Services\<ServiceName>\Parameters /v ServiceDll
+
+-Filesystem ACLs on the binary/DLL and its directories = icacls "C:\Path\To\exe_or_folder"
+---Any Users/Authenticated Users (M/F/W) on program folders? Red flag.
+
+-Who’s in the process = tasklist /svc
+---Map PIDto services; pivot into Process Explorer/ProcMon if needed.
+
+#SDDL mini-legend
+-CC Query config, LC Query status, SW Enumerate dependents
+-RP Start, WP Stop, DT Pause/Continue, LO Interrogate, CR User control
+-RC Read security, SD Delete, WD Write DACL, WO Write owner
+
+#Example:
+D:(A;;CCLCSWRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+--- Authenticated Users can read & start; Administrators have full control.
+
+#Hardening
+-Run under LocalService/NetworkService or gMSA, not LocalSystem unless required.
+-Quote paths with spaces; install into Program Files with tight ACLs.
+-Lock service DACL: only Admins/System can change/start/stop where appropriate.
+-Review Recovery tab (no arbitrary program paths).
+-Monitor events: 7045/7036/7040 (System), 4697/4688/4672 (Security).
